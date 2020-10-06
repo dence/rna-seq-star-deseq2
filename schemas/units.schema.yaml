@@ -5,6 +5,12 @@ properties:
   sample:
     type: string
     description: sample name/id the unit has been sequenced from
+  subfile:
+    type: string
+    description: the fastq files are separated into 3 subfiles
+  lane:
+    type: string
+    description: lane
   unit:
     type: string
     description: unit id

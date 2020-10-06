@@ -1,4 +1,3 @@
-sample	unit	fq1	fq2
-A	lane1	A.1.fq.gz	A.2.fq.gz
-A	lane2	A2.1.fq.gz	A2.2.fq.gz
-B	rep1	B.1.fq.gz	B.2.fq.gz
+sample	rep	unit	fq1	fq2
+2MJScrappings	rep2	lane7	/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/test_data/UF_Derv_001_ATCACG_L007_R1.fastq	/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/test_data/UF_Derv_001_ATCACG_L007_R2.fastq
+2MJScrappings	rep2	lane8	/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/test_data/UF_Derv_001_ATCACG_L008_R1.fastq	/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/test_data/UF_Derv_001_ATCACG_L008_R2.fastq

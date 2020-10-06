@@ -8,7 +8,11 @@ properties:
   condition:
     type: string
     description: sample condition that will be compared during differential expression analysis (e.g. a treatment, a tissue time, a disease)
+  tissue:
+    type: string
+    description: tissue from which sample was obtained and will be compared during differential expression analysis
 
 required:
   - sample
   - condition
+  - tissue

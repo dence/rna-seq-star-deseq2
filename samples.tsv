@@ -1,3 +1,2 @@
-sample	condition
-A	untreated
-B	treated
+sample	condition	tissue
+2MJScrappings	MeJAtreated	cambium

@@ -27,7 +27,7 @@ properties:
         type: string
     required:
       - index
-      - annotation
+      #- annotation
 
   pca:
     type: object
@@ -50,7 +50,7 @@ properties:
   params:
     type: object
     properties:
-      star: 
+      star:
         type: string
       cutadapt-se:
         type: string
