@@ -4,6 +4,7 @@ include: "rules/common.smk"
 include: "rules/trim.smk"
 include: "rules/align.smk"
 include: "rules/diffexp.smk"
+include: "rules/samtools_index.smk"
 #include: "rules/qc.smk"
 
 import pandas as pd
@@ -16,19 +17,18 @@ min_version("5.1.2")
 def all_input(wildcards):
 	wanted_input = []
 	wanted_input.extend(
-		expand(["results/star/{sample}-{unit}Aligned.out.bam"], sample=units["sample"],unit=units["unit"])
-	)
+		expand(["results/star/{sample}-{unit}.Aligned.sortedByCoord.out.bam"],
+			sample=units["sample"],unit=units["unit"]))
+	wanted_input.extend(
+			expand(["results/diffexp/{contrast}.diffexp.tsv",
+				"results/diffexp/{contrast}.ma-plot.svg"],
+				contrast=config["diffexp"]["contrasts"]))
+	wanted_input.extend(["results/pca.svg"])
+	#wanted_input.extend(["results/pca.svg","qc/multiqc_report.html"])
 	return wanted_input
 
 rule all:
-    input: all_input
-		#expand(["star/{sample}-{unit}/Aligned.out.bam"])
-		#expand(["results/diffexp/{contrast}.diffexp.tsv",
-        #        "results/diffexp/{contrast}.ma-plot.svg"],
-        #       contrast=config["diffexp"]["contrasts"]),
-        #"results/pca.svg",
-        #"qc/multiqc_report.html"
-
+	input: all_input
 
 ##### setup singularity #####
 
@@ -36,7 +36,5 @@ rule all:
 # with --use-conda --use-singularity
 singularity: "docker://continuumio/miniconda3"
 
-
 ##### setup report #####
-
 report: "report/workflow.rst"
