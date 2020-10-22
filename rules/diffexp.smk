@@ -38,8 +38,13 @@ rule deseq2_init:
 	log:
 		"logs/deseq2/init.log"
 	threads: get_deseq2_threads()
-	script:
-		"../scripts/deseq2-init.R"
+	#script:
+	#	"../scripts/deseq2-init.R"
+	shell:
+		"""
+		module load R;
+		Rscript ../scripts/deseq2-init.R {input.counts} {output} {params.samples} {log} {threads} 
+		"""
 
 rule pca:
 	input:
