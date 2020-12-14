@@ -3,14 +3,12 @@
 
 import pysam
 import pandas as pd
+import numpy as np
 
 def get_sample_counts(bam_file, reference):
-	print("This is bam_file")
-	print(bam_file)
-	sample = bam_file.split("A")[0]
+
 	bamfile_obj = pysam.AlignmentFile(bam_file,'rb')
-	print("This is the reference variable")
-	print(reference)
+
 	ref = open(reference + "/chrName.txt",'r')
 
 	curr_file_counts = []
@@ -27,21 +25,29 @@ def get_sample_counts(bam_file, reference):
 	counts = pd.DataFrame(curr_file_counts)
 	counts = counts.transpose()
 	counts.columns=ref_list
+	counts = counts.transpose()
 	return counts
 
 ############################################################
+
+
 bam_files = snakemake.input.bams
+counts = [get_sample_counts(f, snakemake.params.ref)
+			for f in bam_files]
 
-all_counts = pd.DataFrame()
-for f in snakemake.input.bams:
-	all_counts = all_counts.append(get_sample_counts(f, snakemake.params.ref))
-print("all_counts is:")
-print(all_counts)
-new_DF.columns = snakemake.params.samples
-for t, sample in zip(new_DF, snakemake.samples):
+samples = snakemake.params.samples
+print("checking sample order in the python script")
+print(samples)
+for t, sample in zip(counts, samples):
 	t.columns = [sample]
-
-matrix = pd.concat(new_DF, axis=1)
+print("checking sample order in the python script after the zip")
+for t in counts:
+	print(t.columns)
+matrix = pd.concat(counts, axis=1)
 matrix.index.name = "gene"
+print("Checking columns in matrix before groupby")
+print(matrix.columns)
 matrix = matrix.groupby(matrix.columns, axis=1).sum()
+print("Checking columns in matrix")
+print(matrix.columns)
 matrix.to_csv(snakemake.output[0], sep="\t")
