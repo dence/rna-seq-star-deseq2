@@ -17,11 +17,15 @@ trimming:
 
 ref:
   # the STAR index
-  index:
-    "Miami_of_Ohio": "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/t3352.cdna.v1.contig"
-    "PacBio": "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/PacBio"
-    "Clustered": "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/clustered_longer_than_500.est_0.99"
-    "v2.01_annnotations": "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/v2.01_genome_annots_index"
+  #index: "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/v2.01_genome_annots_index"
+  #index: "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/t3352.cdna.v1.contig"
+  index: "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/clustered_longer_than_500.est_0.9"
+  #index: "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/PacBio"
+
+    #"Miami_of_Ohio": "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/t3352.cdna.v1.contig"
+    #"PacBio": "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/PacBio"
+    #"Clustered": "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/clustered_longer_than_500.est_0.9"
+    #"v2.01_annnotations": "/home/d.ence/d.ence_peter_share/pinus_taeda_L/reanalysis_old_RNAseq/rna-seq-star-deseq2/star_indices/v2.01_genome_annots_index"
   # gtf file with transcripts
   #annotation: "path/to/annotation.gtf"
 
@@ -37,14 +41,17 @@ diffexp:
     treated-vs-untreated:
       - MeJAtreated
       - MeJAcontrol
-    cambium-vs-stem:
-      - cambium
-      - stem
+    #cambium-vs-stem:
+    #  - cambium
+    #  - stem
 
 #got the options for aligning EndToEnd from github from the STAR developers
 #https://github.com/alexdobin/STAR/issues/123
 params:
+  #star: "--alignEndsType EndToEnd --alignIntronMax 1 --alignIntronMin 2 --scoreDelOpen -10000 --scoreInsOpen -10000"
+  star: "--alignEndsType EndToEnd --outFilterScoreMinOverLread 0 --outFilterMatchNminOverLread 0 --outFilterMatchNmin 0 --outFilterMismatchNmax 2 "
+  #star: "--alignEndsType EndToEnd --alignIntronMax 1 --alignIntronMin 2 --scoreDelOpen -10000 --scoreInsOpen -10000 --outFilterMismatchNmax 2"
+  #star: "--alignEndsType EndToEnd --alignIntronMax 1 --alignIntronMin 2 --scoreDelOpen -10000 --scoreInsOpen -10000 --outFilterScoreMinOverLread 0 --outFilterMatchNminOverLread 0 --outFilterMatchNmin 0 "
   #star: "--alignEndsType EndToEnd --alignIntronMax 1 --alignIntronMin 2 --scoreDelOpen -10000 --scoreInsOpen -10000 --outFilterScoreMinOverLread 0 --outFilterMatchNminOverLread 0 --outFilterMatchNmin 0 --outFilterMismatchNmax 2 "
-  star: "--alignEndsType EndToEnd --alignIntronMax 1 --alignIntronMin 2 --scoreDelOpen -10000 --scoreInsOpen -10000 --outFilterScoreMinOverLread 0 --outFilterMatchNminOverLread 0 --outFilterMatchNmin 0 "
   cutadapt-se: ""
   cutadapt-pe: ""
